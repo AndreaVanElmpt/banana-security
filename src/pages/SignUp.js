@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 
+
 function SignUp() {
+
+
   return (
     <>
       <h1>Registreren</h1>
@@ -10,7 +13,7 @@ function SignUp() {
         doloremque ea eveniet facere fuga illum in numquam quia reiciendis rem sequi tenetur veniam?</p>
       <form>
         <p>*Invoervelden*</p>
-      </form>
+           </form>
       <p>Heb je al een account? Je kunt je <Link to="/signin">hier</Link> inloggen.</p>
     </>
   );
