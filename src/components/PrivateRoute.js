@@ -4,9 +4,10 @@ import {AuthContext} from "../context/AuthContext";
 
 function PrivateRoute({ children, ...rest}) {
     const { isAuth } = useContext(AuthContext);
+
     return (
         <Route {...rest} >
-            {isAuth === true ? children : <Redirect to='/signIn' />}
+            {isAuth ? children : <Redirect to='/' />}
         </Route>
     );
 }

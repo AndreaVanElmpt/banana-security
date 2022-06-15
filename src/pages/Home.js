@@ -8,7 +8,7 @@ function Home() {
 
   return (
     <>
-      <h1>Homepagina</h1>
+      <h1>Homepage</h1>
       <section>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem id libero provident! Accusantium at autem
           cumque, esse eum, fugiat ipsa ipsam quia quis ratione repudiandae sapiente sequi sit tempora voluptates.
