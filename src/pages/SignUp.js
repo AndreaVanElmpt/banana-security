@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import axios from "axios";
 
 
@@ -7,6 +7,7 @@ function SignUp() {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const history = useHistory();
 
     async function handleSubmit(e){
        e.preventDefault()
@@ -18,8 +19,10 @@ function SignUp() {
            }
         )
         console.log(email, username, password)
+            history.push('./profile')
         } catch (e) {
            console.error(e)
+
         }
     }
 
@@ -51,7 +54,7 @@ function SignUp() {
                   onChange={(e) => setPassword(e.target.value)}
               />
           </label>
-          <button type='submit'>Registreren</button>
+          <button type='submit' onClick={handleSubmit}>Registreren</button>
            </form>
       <p>Heb je al een account? Je kunt je <Link to="/signin">hier</Link> inloggen.</p>
     </>
