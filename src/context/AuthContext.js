@@ -50,6 +50,7 @@ function AuthContextProvider({ children }) {
                     localStorage.clear();
                     console.error(e)
                 }
+
             }
 
             getData( );
