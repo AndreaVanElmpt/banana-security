@@ -20,66 +20,62 @@ function AuthContextProvider({ children }) {
         const token = localStorage.getItem('token');
 
         if (token){
+            const decodedToken = jwt_decode(token)
 
-            async function getData(){
-                const decodedToken = jwt_decode(token);
+            getData(token, decodedToken.sub)
 
-                try {
-                    const data = await axios.get(`http://localhost:3000/600/users/${decodedToken.sub}`,{
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`,
-                        }
-                    });
-
-                    toggleAuth({
-                        isAuth: true,
-                        user: {
-                            username: data.data.username,
-                            email: data.data.email,
-                            id: data.data.id,
-                        },
-                        status: 'done',
-                    })
-
-                }catch (e) {
-                    toggleAuth({
-                        ...auth,
-                        status: 'error',
-                    });
-                    localStorage.clear();
-                    console.error(e)
-                }
-
-            }
-
-            getData( );
 
         } else {
             toggleAuth({
                 ...auth,
+                user: null,
                 status: 'done'
             });
         }
 
         }, []);
+    async function getData(token, id){
+        // const decodedToken = jwt_decode(token);
 
+        try {
+            const data = await axios.get(`http://localhost:3000/600/users/${id}`,{
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
+            toggleAuth({
+                ...auth,
+                isAuth: true,
+                user: {
+                    username: data.data.username,
+                    email: data.data.email,
+                    id: data.data.id,
+                },
+                status: 'done',
+            })
+            history.push('/profile')
+        }catch (e) {
+            toggleAuth({
+                ...auth,
+                status: 'error',
+            });
+            localStorage.clear();
+            console.error(e)
+        }
+
+    }
     function login (token){
         const decodedToken =jwt_decode( token );
         console.log(decodedToken)
         localStorage.setItem('token', token)
 
-        toggleAuth({
-            ...auth,
-            isAuth: true,
-            user: {
-                email: decodedToken.email,
-                id: decodedToken.sub,
-            },
-            status: 'done',
-        });
+        getData(token, decodedToken.sub)
+
+
         console.log('De gebruiker is ingelogd')
-        history.push('./profile')
+
     }
 
 

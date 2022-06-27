@@ -19,7 +19,7 @@ function SignUp() {
            }
         )
         console.log(email, username, password)
-            history.push('./profile')
+            history.push('/signin')
         } catch (e) {
            console.error(e)
 

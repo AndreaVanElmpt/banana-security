@@ -1,10 +1,9 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
-import {AuthContext} from "../context/AuthContext";
+
 
 function Home() {
-  const {isAuth} = useContext(AuthContext)
-  console.log(isAuth);
+
 
   return (
     <>
